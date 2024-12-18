@@ -2,55 +2,22 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="components/loader.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <title>天気情報アプリ</title>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <!-- カスタムCSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Firebaseの設定 -->
+    <script src="config.js"></script>
 </head>
 <body>
-    <script>
-        // OpenWeatherMap APIキー
-        const apiKey =;  // ここにAPIキーを入力
-
-        async function getWeather(city, elementId) {
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric&lang=ja`;
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`天気情報の取得に失敗しました: ${response.statusText}`);
-                }
-                const data = await response.json();
-                console.log(data); // デバッグ用
-                displayWeather(data, elementId);
-            } catch (error) {
-                console.error('エラー:', error);
-                document.getElementById(elementId).textContent = error.message;
-            }
-        }
-
-        function displayWeather(data, elementId) {
-            if (!data || !data.main || !data.weather) {
-                document.getElementById(elementId).textContent = '天気情報の取得に失敗しました。データが不完全です。';
-                return;
-            }
-            const weatherInfoDiv = document.getElementById(elementId);
-            weatherInfoDiv.innerHTML = `
-                <h2>${data.name}の天気</h2>
-                <p>温度: ${data.main.temp} °C</p>
-                <p>天気: ${data.weather[0].description}</p>
-                <p>湿度: ${data.main.humidity}%</p>
-                <p>風速: ${data.wind.speed} m/s</p>
-            `;
-        }
-
-        // ページが読み込まれた時に天気情報を取得
-        window.addEventListener('DOMContentLoaded', () => {
-            getWeather('Fukuoka', 'weather-info-fukuoka');
-            getWeather('Tokyo', 'weather-info-tokyo');
-            getWeather('Hokkaido', 'weather-info-hokkaido');
-        });
-    </script>
-
-     <h1>天気情報アプリ</h1>
+    <h1>天気情報アプリ</h1>
 
     <!-- 天気情報表示エリア -->
     <div id="weather-info-fukuoka" class="weather-info1">
@@ -63,5 +30,7 @@
         北海道の天気情報を取得中...
     </div>
 
+    <!-- メインスクリプト -->
+    <script src="main.js"></script>
 </body>
 </html>
