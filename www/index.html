@@ -3,16 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>天気情報アプリ</title>
         <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>天気情報アプリ</h1>
-    <div id="weather-info" class="weather-info">
-        天気情報を取得中...
-    </div>
-
     <script>
         // OpenWeatherMap APIキー
         const apiKey = '36d47b749ace304cd2c333e5622e051f';  //https://api.openweathermap.orgから天気を取得するAPIキーを
@@ -62,5 +56,12 @@
             getWeather(city);
         });
     </script>
+    <title>天気情報アプリ</title>
+    <h1>天気情報アプリ</h1>
+    <div id="weather-info" class="weather-info">
+        天気情報を取得中...
+    </div>
+
+
 </body>
 </html>
