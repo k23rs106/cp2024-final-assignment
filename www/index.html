@@ -3,20 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <script>
         // OpenWeatherMap APIキー
-        const apiKey = 'ここにAPI';  //https://api.openweathermap.orgから天気を取得するAPIキーを
-        const city = 'Fukuoka';
+        const apiKey = ;  // ここにAPIキーを入力
 
-        /**
-         * 指定された都市の天気情報を取得する非同期関数
-         * @param {string} city - 天気情報を取得したい都市名
-         */
-        async function getWeather(city) {
+        async function getWeather(city, elementId) {
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric&lang=ja`;
             try {
                 const response = await fetch(url);
@@ -25,23 +20,19 @@
                 }
                 const data = await response.json();
                 console.log(data); // デバッグ用
-                displayWeather(data);
+                displayWeather(data, elementId);
             } catch (error) {
                 console.error('エラー:', error);
-                document.getElementById('weather-info').textContent = error.message;
+                document.getElementById(elementId).textContent = error.message;
             }
         }
 
-        /**
-         * 取得した天気情報をページ上に表示する関数
-         * @param {Object} data - OpenWeatherMap APIから取得した天気データ
-         */
-        function displayWeather(data) {
+        function displayWeather(data, elementId) {
             if (!data || !data.main || !data.weather) {
-                document.getElementById('weather-info').textContent = '天気情報の取得に失敗しました。データが不完全です。';
+                document.getElementById(elementId).textContent = '天気情報の取得に失敗しました。データが不完全です。';
                 return;
             }
-            const weatherInfoDiv = document.getElementById('weather-info');
+            const weatherInfoDiv = document.getElementById(elementId);
             weatherInfoDiv.innerHTML = `
                 <h2>${data.name}の天気</h2>
                 <p>温度: ${data.main.temp} °C</p>
@@ -53,15 +44,24 @@
 
         // ページが読み込まれた時に天気情報を取得
         window.addEventListener('DOMContentLoaded', () => {
-            getWeather(city);
+            getWeather('Fukuoka', 'weather-info-fukuoka');
+            getWeather('Tokyo', 'weather-info-tokyo');
+            getWeather('Hokkaido', 'weather-info-hokkaido');
         });
     </script>
-    <title>天気情報アプリ</title>
-    <h1>天気情報アプリ</h1>
-    <div id="weather-info" class="weather-info">
-        天気情報を取得中...
-    </div>
 
+     <h1>天気情報アプリ</h1>
+
+    <!-- 天気情報表示エリア -->
+    <div id="weather-info-fukuoka" class="weather-info1">
+        福岡の天気情報を取得中...
+    </div>
+    <div id="weather-info-tokyo" class="weather-info2">
+        東京の天気情報を取得中...
+    </div>
+    <div id="weather-info-hokkaido" class="weather-info3">
+        北海道の天気情報を取得中...
+    </div>
 
 </body>
 </html>

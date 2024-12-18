@@ -1,14 +1,35 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color:rgb(230,230,250);
     text-align: center;
     padding: 50px;
 }
-.weather-info {
-    background-color: #fff;
+.weather-info1 {
+    background-color: #d4edda;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 10px;
+    line-height: 1;
+    border: 10px solid rgb(250,250,230);
+}
+.weather-info2 {
+    background-color: #d4edda;
+    padding: 20px;
+    border-radius: 30px;
     display: inline-block;
     margin-top: 20px;
+    line-height: 1;
+    border: 10px solid rgb(250,250,230);
+
+}
+.weather-info3{
+    background-color: #d4edda;
+    padding: 20px;
+    border-radius: 40px;
+    display: inline-block;
+    margin-top: 20px;
+    line-height: 1;     
+    border: 10px solid rgb(250,250,230);
+
 }
